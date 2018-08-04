@@ -4,7 +4,7 @@
 //const int L1 = 150; // Distancia en mm desde el eje Muslo al eje Rodilla
 //const int L2 = 145; // Distancia en mm desde el eje Rodilla al eje Tobillo
 //const int L3 = 31; // Distancia en mm desde el eje Tobillo al suelo (referencia)
-const int G[3][3]={{0, 0, 0},{150, 140, 0},{0, 0, 0}};
+const int DH[3][3]={{0, 0, 0},{150, 140, 0},{0, 0, 0}};
 const int ToolPunta[3]={30, 65, 0};
 const int ToolTaco[3]={30, -33, 0};
 Servo MusloI;
@@ -262,3 +262,8 @@ void PiernaD (int M, int R, int T){
 }
 
 //Funcion problema directo
+
+float Directo(int Angulos){
+  int R[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+  for (int i= 0: i=2; i++){
+    R=R*{
