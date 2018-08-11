@@ -263,7 +263,46 @@ void PiernaD (int M, int R, int T){
 
 //Funcion problema directo
 
-float Directo(int Angulos){
-  int R[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
-  for (int i= 0: i=2; i++){
-    R=R*{
+float Directo(int Angulos[3], float R03[][4]){
+   //Modifica la matriz de rotacion y devuelve la POSE
+  int R[4][4]; // matriz intermedia para los calculos
+  float Ri[4][4]; // matriz de rotacion del angulo i
+  float POSE[4];
+  for (int j=0; j=3; j++){
+      for (int k=0; k=3; k++){
+        if (j==k)R03[j][k]=1;
+          else R03[j][k]=0;
+      }
+  }
+      
+  for (int i=0; i=2; i++){
+    Ri[0][0]=cos(Angulos[i]);
+    Ri[0][1]=-sin(Angulos[i]);
+    Ri[0][3]=DH[i][2]*cos(Angulos[i]);
+    Ri[1][0]=sin(Angulos[i]);
+    Ri[1][1]=cos(Angulos[i]);
+    Ri[1][3]=DH[i][2]*sin(Angulos[i]);
+        
+    R[0][0]= R03[0][0]*Ri[0][0]+R03[0][1]*Ri[1][0];
+    R[0][1]= R03[0][0]*Ri[0][1]+R03[0][1]*Ri[1][1];
+    R[0][3]= R03[0][0]*Ri[0][3]+R03[0][1]*Ri[1][3]+R03[0][3];
+    R[1][0]= R03[1][0]*Ri[0][0]+R03[1][1]*Ri[1][0];
+    R[1][1]= R03[1][0]*Ri[0][1]+R03[1][1]*Ri[1][1];
+    R[1][3]= R03[1][0]*Ri[0][3]+R03[1][1]*Ri[1][3]+R03[1][3];
+    
+    for (int j=0; j=3; j++){
+      for (int k=0; k=3; k++){
+        R03[j][k]=R[j][k];
+      };
+    };
+  };
+  POSE[1]= R03[1][4]; 
+  POSE[2]= R03[2][4];
+  POSE[3]= Angulos[1]+Angulos[2]+Angulos[3];
+  if (Angulos[2] <0) POSE[4]= -1;
+    else POSE[4]= 1;
+ } 
+ 
+ 
+ //Funcion Problema Inverso
+ 
