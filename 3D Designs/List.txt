@@ -1,1 +1,27 @@
-Este archivo no vale nada
+Archivos para imprimir:
+(ver imagen servo9g para referencia)
+Se recomienda pegar con pistola de silicona u otro los motores y las barras a las piezas impresas
+
+Conjuto del tobillo:
+1x Tobillo1.stl
+1x Tobillo2.stl
+2x Transversal.stl
+utiliza la barra A que traen los servos 9g
+
+Conjuto de la Rodilla:
+1x rodilla1.stl
+1x rodilla2b.stl
+utiliza la barra B que traen los servos 9g
+
+Conjunto Muslo:
+1x muslo.stl
+Encastra en cadera con barra A del servo en Cadera Bottom
+
+Cadera:
+1x Cadera Top.stl
+1x Cadera Bottom.stl
+2x Rollo M2.stl
+1x Rollo M2 motor.stl 
+utiliza la barra B que traen los servos 9g
+
+
