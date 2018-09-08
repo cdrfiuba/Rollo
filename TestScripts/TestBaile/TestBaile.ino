@@ -4,6 +4,7 @@
 //const int L1 = 150; // Distancia en mm desde el eje Muslo al eje Rodilla
 //const int L2 = 145; // Distancia en mm desde el eje Rodilla al eje Tobillo
 //const int L3 = 31; // Distancia en mm desde el eje Tobillo al suelo (referencia)
+const char DANCE_MOVE_DURA = 'D';
 
 Servo MusloI;
 Servo RodillaI;
@@ -30,7 +31,7 @@ Servo Cabeza;
 
 void setup() 
 {
-  
+  Serial.begin(9600);
   // Asigno cada servo a una salida "analogica"  
   MusloI.attach(A5);
   TobilloI.attach(A3);
@@ -61,34 +62,45 @@ void loop() {
   delay(500);
   BrazoD.write(90-45);
   BrazoI.write(90+45);
+  delay(1000);
   //espera 2 segundos desde que se conecta
   //Walking(/*'Izquierda',*/ 5);
-  Dance('Dura');
+  Dance(DANCE_MOVE_DURA);
   delay(2000);
 } 
 
 void Dance(char DanceMove){
   int DireccionCadera=1;
-  int BPM = 95;
-  int dt = round((60/BPM)*1000);
+  float BPM = 95;
+  int dt = round((60.0/BPM)*1000);
+  Serial.println("sin switch");
+  Serial.println(dt);
   switch (DanceMove){
-    case 'Dura':
-      for (int i=1; i<3; i++){ //Intro
+    case DANCE_MOVE_DURA:
+    Serial.println("Dura");
+    Serial.println("9");
+      for (int i=1; i<4; i++){ //Intro
         for (int j=1; j<15; j++){
-          if (i>1){
+          if (i==1){
             DireccionCadera = DireccionCadera*(-1);
-            Cadera.write(90+DireccionCadera*20);
-            delay(dt);  
+            Cadera.write(90+DireccionCadera*30);
+            delay(dt);
+            Serial.println("intro");
+              
           }
           else {
             DireccionCadera = DireccionCadera*(-1);
-            Cadera.write(90+DireccionCadera*20);
+            Cadera.write(90+DireccionCadera*30);
             BrazoI.write(90+DireccionCadera*45);
             BrazoD.write(90+DireccionCadera*45);
             delay(dt);
+            Serial.println("meneo");
           }
        }
      }
+     break;
+     default:
+     Serial.println("no entro en dura");
   }
 }
 

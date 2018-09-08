@@ -28,22 +28,7 @@ void loop(){
 //  Serial.println(DH[1][0], DEC);
 //  Serial.println(Matriz[3][2], DEC);
 //  R03 = Identidad;
-  for (int i=0; i=2; i++){
-    Ri[0][0]=cos(Angulos[i]);
-    Ri[0][1]=-sin(Angulos[i]);
-    Ri[0][3]=DH[i][2]*cos(Angulos[i]);
-    Ri[1][0]=sin(Angulos[i]);
-    Ri[1][1]=cos(Angulos[i]);
-    Ri[1][3]=DH[i][2]*sin(Angulos[i]);
-        
-    R03[0][0]= R03[0][0]*Ri[0][0]+R03[0][1]*Ri[1][0];
-    R03[0][1]= R03[0][0]*Ri[0][1]+R03[0][1]*Ri[1][1];
-    R03[0][3]= R03[0][0]*Ri[0][3]+R03[0][1]*Ri[1][3]+R03[0][3];
-    R03[1][0]= R03[1][0]*Ri[0][0]+R03[1][1]*Ri[1][0];
-    R03[1][1]= R03[1][0]*Ri[0][1]+R03[1][1]*Ri[1][1];
-    R03[1][3]= R03[1][0]*Ri[0][3]+R03[1][1]*Ri[1][3]+R03[1][3];
-    
-  };
+
   Serial.println(Angulos[1], DEC);
   //Serial.println(Matriz, DEC);
   //Matrix.Print((mtx_type*)DH2, 3, 3, "DH");
@@ -112,3 +97,22 @@ void loop(){
 //    
 //// return R03;
 // } 
+
+void multipmatrix(){
+    for (int i=0; i=2; i++){
+    Ri[0][0]=cos(Angulos[i]);
+    Ri[0][1]=-sin(Angulos[i]);
+    Ri[0][3]=DH[i][2]*cos(Angulos[i]);
+    Ri[1][0]=sin(Angulos[i]);
+    Ri[1][1]=cos(Angulos[i]);
+    Ri[1][3]=DH[i][2]*sin(Angulos[i]);
+        
+    R03[0][0]= R03[0][0]*Ri[0][0]+R03[0][1]*Ri[1][0];
+    R03[0][1]= R03[0][0]*Ri[0][1]+R03[0][1]*Ri[1][1];
+    R03[0][3]= R03[0][0]*Ri[0][3]+R03[0][1]*Ri[1][3]+R03[0][3];
+    R03[1][0]= R03[1][0]*Ri[0][0]+R03[1][1]*Ri[1][0];
+    R03[1][1]= R03[1][0]*Ri[0][1]+R03[1][1]*Ri[1][1];
+    R03[1][3]= R03[1][0]*Ri[0][3]+R03[1][1]*Ri[1][3]+R03[1][3];
+    
+  };
+}
