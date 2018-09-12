@@ -71,8 +71,9 @@ void loop() {
 
 void Dance(char DanceMove){
   int DireccionCadera=1;
-  float BPM = 95;
-  int dt = round((60.0/BPM)*1000);
+  float BPM = 95; //beats por minuto del ritmo que se baila
+  int dt = round((60.0/BPM)*1000); //Variable de tiempo para marcar el ritmo
+  
   Serial.println("sin switch");
   Serial.println(dt);
   switch (DanceMove){
@@ -83,16 +84,25 @@ void Dance(char DanceMove){
         for (int j=1; j<15; j++){
           if (i==1){
             DireccionCadera = DireccionCadera*(-1);
-            Cadera.write(90+DireccionCadera*30);
+            //Cadera.write(110+DireccionCadera*30);
             delay(dt);
             Serial.println("intro");
               
           }
           else {
             DireccionCadera = DireccionCadera*(-1);
-            Cadera.write(90+DireccionCadera*30);
-            BrazoI.write(90+DireccionCadera*45);
-            BrazoD.write(90+DireccionCadera*45);
+            //Cadera.write(110+DireccionCadera*30);
+            //BrazoI.write(90+DireccionCadera*45);
+            //BrazoD.write(90+DireccionCadera*45);
+            if (DireccionCadera>0){
+              PiernaI(30, -30, 30); //cambiado en func auxiliares
+              PiernaD(30, -30, 30);
+            }
+            /*else {
+              PiernaI(0, 0, 0);
+              PiernaD(5, -10, 5);
+            }*/
+            
             delay(dt);
             Serial.println("meneo");
           }
@@ -123,7 +133,7 @@ void Walking(/*char Inicio,*/ int pasos){
 //    Rodilla1 = RodillaI;
 //    Tobillo1 = TobilloI;
 //    Muslo2 = MusloD;
-//    Rodilla2 = RodillaD;
+//    Rodill-a2 = RodillaD;
 //    Tobillo2 = TobilloD;
 //  }else if(Inicio == 'Derecha'){
 //    Muslo1 = MusloD;
@@ -277,7 +287,7 @@ float sind(float angle){
 
 void PiernaI (int M, int R, int T){
 //  while (int i=0 <90){ 
-    MusloI.write(90+round(M/*i*M/90*/));
+    MusloI.write(90-round(M/*i*M/90*/));
     RodillaI.write(90+round(R/*i*R/90*/));
     TobilloI.write(90+round(T/*i*T/90*/));
  //   delay(5);
