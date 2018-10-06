@@ -1,4 +1,3 @@
-
 #include <Servo.h> 
 
 //const int L1 = 150; // Distancia en mm desde el eje Muslo al eje Rodilla
@@ -29,6 +28,10 @@ Servo Cabeza;
 //int pasos =5;
 
 
+// Prototipos: definir las funciones arriba para avisar que existen mas abajo
+
+//void PiernaD (int M, int R, int T);
+
 void setup() 
 {
   Serial.begin(9600);
@@ -45,12 +48,17 @@ void setup()
   Cabeza.attach(A8); // Digital 9
 
   // set servo to mid-point
-  MusloI.write(90);  
-  TobilloI.write(90);  
-  RodillaI.write(90);  
-  MusloD.write(90);  
-  TobilloD.write(90);  
-  RodillaD.write(90);  
+  PiernaI(0,0,0);
+  PiernaD(0,0,0);
+  CaderaM(0);
+  
+  //MusloI.write(90);  Esto ya esta en las funciones Pierna
+  //TobilloI.write(90);  Se puede ajustar el centro
+  //RodillaI.write(90);  
+//  MusloD.write(90);  
+//  TobilloD.write(90);  
+//  RodillaD.write(90);
+    
   Cadera.write(90);
   BrazoI.write(90);
   BrazoD.write(90);
@@ -70,14 +78,16 @@ void loop() {
 } 
 
 void Dance(char DanceMove){
-  int DireccionCadera=1;
-  float BPM = 95; //beats por minuto del ritmo que se baila
-  int dt = round((60.0/BPM)*1000); //Variable de tiempo para marcar el ritmo
+  
   
   Serial.println("sin switch");
-  Serial.println(dt);
+  
   switch (DanceMove){
     case DANCE_MOVE_DURA:
+    {
+    int DireccionCadera=1;
+    float BPM = 95; //beats por minuto del ritmo que se baila
+    int dt = round((60.0/BPM)*1000); //Variable de tiempo para marcar el ritmo
     Serial.println("Dura");
     Serial.println("9");
       for (int i=1; i<4; i++){ //Intro
@@ -109,6 +119,7 @@ void Dance(char DanceMove){
        }
      }
      break;
+    }
      default:
      Serial.println("no entro en dura");
   }
@@ -286,6 +297,7 @@ float sind(float angle){
 // Los angulos van entre -90 y 90 ya que se miden desde el medio del recorrido del servo
 
 void PiernaI (int M, int R, int T){
+    
 //  while (int i=0 <90){ 
     MusloI.write(90-round(M/*i*M/90*/));
     RodillaI.write(90+round(R/*i*R/90*/));
@@ -304,3 +316,35 @@ void PiernaD (int M, int R, int T){
 //    i++;
 //  }
 }
+
+void CaderaM (int C){
+  Cadera.write(90-round(C/*i*M/90*/));
+}
+
+void SweepPD(int Time, int T1, int T2, int T3){
+  int p1=(int)MusloD.read();
+  int p2=(int)RodillaD.read();
+  int p3=(int)TobilloD.read();
+  int Previo[3]=[p1,p2,p3]; //porque no me dejaba declarar todo adentro del int. Fuck logic
+  int Target[3]=[T1, T2, T3]; // TIRA ERROR
+  int Actual[3]=Previo;
+  for (int i=0; i<Time/2.0; i++){
+    Actualizar (Actual, Previo, Target, i, Time); 
+    PiernaD(Actual);
+  }
+}
+
+void Resta (int arr1[3],int arr2[3],int resultado[3]){
+  for (int i=0; i<2; i++){
+    resultado[i]=arr1[i]-arr2[i];
+}
+}
+
+void Actualizar (int Actual[3], int Previo[3], int Target[3], int i, int Time){
+  int Diff[3];
+  Resta(Target, Previo, Diff);
+  for (int j=0; j<2; j++){
+    Actual[j]= Previo[j] + i*Diff[j]/(float)Time;
+  }
+}
+
