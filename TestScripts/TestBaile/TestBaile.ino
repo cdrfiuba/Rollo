@@ -321,16 +321,32 @@ void CaderaM (int C){
   Cadera.write(90-round(C/*i*M/90*/));
 }
 
-void SweepPD(int Time, int T1, int T2, int T3){
-  int p1=(int)MusloD.read();
-  int p2=(int)RodillaD.read();
-  int p3=(int)TobilloD.read();
-  int Previo[3]=[p1,p2,p3]; //porque no me dejaba declarar todo adentro del int. Fuck logic
-  int Target[3]=[T1, T2, T3]; // TIRA ERROR
-  int Actual[3]=Previo;
-  for (int i=0; i<Time/2.0; i++){
-    Actualizar (Actual, Previo, Target, i, Time); 
-    PiernaD(Actual);
+void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Armd, int Armi, int Head, int Timelapse){// Barrido de motres: Muslo, Rodilla y Tobillo derecho, izquierdo, Cadera (hip)
+  // Brazos (Arms) Derecho e izquierdo y cabeza
+  // TimeLapse: Tiempo en el cual se espera se realizen los movimientos en [ms]
+  int TimeStart = millis();
+  int Pasos= round(Timelapse/2.0) ;//Defino que cada paso es de 2.0 ms
+  int PrevioPD[3]={MusloD.read(), RodillaD.read(), TobilloD.read()};
+  int TargetPD[3]={Md, Rd, Td}; 
+  int ActualPD[3]={PrevioPD};
+  int PrevioPI[3]={MusloI.read(), RodillaI.read(), TobilloI.read()};
+  int TargetPI[3]={Mi, Ri, Ti}; 
+  int ActualPI[3]={PrevioPI};
+  int PrevioTorso[3]={Cadera.read(), BrazoD.read(), BrazoI.read()};
+  int TargetTorso[3]={Hip, Armd, Armi}; 
+  int ActualTorso[3]={PrevioTorso};
+  for (int i=0; i<Pasos; i++){
+    //Obtengo la nueva posicion acorde al progreso
+    Actualizar (ActualPD, PrevioPD, TargetPD, i, Pasos);
+    Actualizar (ActualPI, PrevioPI, TargetPI, i, Pasos);
+    Actualizar (ActualTorso, PrevioTorso, TargetTorso, i, Pasos);
+    //Mando la orden a los sevos
+    PiernaD(ActualPD[0], ActualPD[1], ActualPD[2]);
+    PiernaI(ActualPI[0], ActualPI[1], ActualPI[2]);
+    CaderaM(ActualTorso[0]);
+    BrazoD.write(ActualTorso[1]);
+    BrazoI.write(ActualTorso[2]);
+    delay(2); //Delay acorde a Pasos
   }
 }
 
@@ -340,11 +356,11 @@ void Resta (int arr1[3],int arr2[3],int resultado[3]){
 }
 }
 
-void Actualizar (int Actual[3], int Previo[3], int Target[3], int i, int Time){
+void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, int TimeTotal){
   int Diff[3];
   Resta(Target, Previo, Diff);
   for (int j=0; j<2; j++){
-    Actual[j]= Previo[j] + i*Diff[j]/(float)Time;
+    Actual[j]= Previo[j] + round(TiempoActual*Diff[j]/(float)TimeTotal);
   }
 }
 
