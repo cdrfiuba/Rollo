@@ -26,7 +26,7 @@ Servo Cabeza;
 // el ultimo valor de una matriz de 3x3 es el M[2][2]
 
 void setup() {
-        Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
+        Serial.begin(115200);     // opens serial port, sets data rate to 9600 bps
         //Angulos = Angulos./(180/pi);
           MusloI.attach(A5);
   TobilloI.attach(A3);
@@ -228,7 +228,12 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
     CaderaM(ActualTorso[0]);
     BrazoD.write(ActualTorso[1]);
     BrazoI.write(ActualTorso[2]);
-    delay(20); //Delay acorde a Pasos
+    Serial.print(Timelapse);
+    Serial.print("-");
+    Serial.print(Pasos);
+    Serial.print("-");
+    Serial.println(i);
+    delay(2); //Delay acorde a Pasos
   }
 }
 
@@ -253,7 +258,7 @@ void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, 
   int Diff[3];
   Resta(Target, Previo, Diff);
   for (int j=0; j<2; j++){
-    Actual[j]= Previo[j] + round(TiempoActual*Diff[j]/(float)TimeTotal);
+    Actual[j]= Previo[j] + TiempoActual*round(Diff[j]/(float)TimeTotal);
   }
 }
 
