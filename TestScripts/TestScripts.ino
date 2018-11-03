@@ -59,12 +59,15 @@ void loop(){
 //  Serial.println(Matriz[3][2], DEC);
 //  R03 = Identidad;
 
-  Serial.println(Angulos[1], DEC);
+  
 
   delay (1500);
   MegaSweep(30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 1000);
+  delay(1000);
   MegaSweep(120, 80, 90, 100, 120, 90, 130, 30, 30, 30, 500);
+  delay(1000);
   MegaSweep(30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 2000);
+  delay(1000);
   MegaSweep(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 50);
   //Serial.println(Matriz, DEC);
   //Matrix.Print((mtx_type*)DH2, 3, 3, "DH");
@@ -217,10 +220,19 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   int PrevioTorso[3]={Cadera.read(), BrazoD.read(), BrazoI.read()};
   int TargetTorso[3]={Hip, Armd, Armi}; 
   int ActualTorso[3]={PrevioTorso};
-  for (int i=0; i<Pasos; i++){
+  for (int i=1; i<Pasos; i++){
     //Obtengo la nueva posicion acorde al progreso
+    Serial.println("Pierna Derecha");
+//    Serial.print("ActualPiernaD 0:");
+//    Serial.print(ActualPD[0]);
+//    Serial.print("Previo PD 0: ");
+//    Serial.print(PrevioPD[0]);
+    
+    
     Actualizar (ActualPD, PrevioPD, TargetPD, i, Pasos);
+    Serial.println("Pierna Izquierda:");
     Actualizar (ActualPI, PrevioPI, TargetPI, i, Pasos);
+    Serial.println("Torso:");
     Actualizar (ActualTorso, PrevioTorso, TargetTorso, i, Pasos);
     //Mando la orden a los sevos
     PiernaD(ActualPD[0], ActualPD[1], ActualPD[2]);
@@ -228,11 +240,14 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
     CaderaM(ActualTorso[0]);
     BrazoD.write(ActualTorso[1]);
     BrazoI.write(ActualTorso[2]);
-    Serial.print(Timelapse);
-    Serial.print("-");
-    Serial.print(Pasos);
-    Serial.print("-");
-    Serial.println(i);
+//    Serial.print("Timetotal: ");
+//    Serial.print(Timelapse);
+//    Serial.print("-");
+//    Serial.print(Pasos);
+//    Serial.print("-");
+//    Serial.print(ActualPI[0]);
+//    Serial.print("-");
+//    Serial.println(i);
     delay(2); //Delay acorde a Pasos
   }
 }
@@ -257,8 +272,22 @@ void Resta (int arr1[3],int arr2[3],int resultado[3]){ //Resta 2 Arrays componen
 void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, int TimeTotal){ //Actualiza la variable "Actual" 
   int Diff[3];
   Resta(Target, Previo, Diff);
-  for (int j=0; j<2; j++){
+    Serial.print("Diff0: ");
+    Serial.print(Diff[0]);
+    Serial.print("- Diff1: ");
+    Serial.print(Diff[1]);
+    Serial.print("- Diff2: ");
+    Serial.print(Diff[2]);
+  Serial.println(" end Diff");
+  for (int j=0; j<3; j++){
+    Serial.print("Tiempo Actual");
+    Serial.print(TiempoActual);
     Actual[j]= Previo[j] + TiempoActual*round(Diff[j]/(float)TimeTotal);
+    Serial.print("ActualJ");
+    Serial.print(j);
+    Serial.print(": ");
+    Serial.print(Actual[j]);
   }
+  Serial.println(" end Actual");
 }
 
