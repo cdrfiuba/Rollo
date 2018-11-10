@@ -42,11 +42,12 @@ void setup() {
   // set servo to mid-point
   PiernaI(0,0,0);
   PiernaD(0,0,0);
-  CaderaM(0);
+  Torso(0, 0,0);
+  //CaderaM(0);
 
-  Cadera.write(90);
-  BrazoI.write(90);
-  BrazoD.write(90);
+//  Cadera.write(90);
+//  BrazoI.write(90);
+//  BrazoD.write(90);
   Cabeza.write(90);
 }
 
@@ -63,7 +64,7 @@ void loop(){
 
   delay (1500);
   MegaSweep(30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 1000);
-  delay(1000);
+  delay(10000);
   MegaSweep(-30, -50, -90, 90, 30, 90, -45, 30, 30, 30, 500);
   delay(1000);
   MegaSweep(30, 30, 30, 30, 30, -30, 30, 30, -30, 30, 2000);
@@ -182,38 +183,40 @@ float sind(float angle){
 void PiernaI (int M, int R, int T){
     // WARNING!!
     // cualquier cambio de seteo, cambiar tambien en PiernaIRead!!
-    MusloI.write(90-round(M/*i*M/90*/));
-    RodillaI.write(90+round(R/*i*R/90*/));
-    TobilloI.write(90+round(T/*i*T/90*/));
+    MusloI.write(90-M);
+    RodillaI.write(90-R);
+    TobilloI.write(90+T);
 
 }
 void PiernaIRead (int PrevioI[3]){
     PrevioI[0] = 90 - MusloI.read(); // porque esta cambiado el signo
-    PrevioI[1] = RodillaI.read() - 90;
+    PrevioI[1] = 90 - RodillaI.read();
     PrevioI[2] = TobilloI.read() - 90;
 }
 
 void PiernaD (int M, int R, int T){
 
-    MusloD.write(90-round(M/*i*M/90*/));
-    RodillaD.write(90-round(R/*i*R/90*/));
-    TobilloD.write(90-round(T/*i*T/90*/));
+    MusloD.write(90+M);
+    RodillaD.write(90+R);
+    TobilloD.write(90-T);
 
 }
 void PiernaDRead (int PrevioD[3]){
-    PrevioD[0] = 90 - MusloD.read(); // porque esta cambiado el signo
-    PrevioD[1] = 90 - RodillaD.read();
+    PrevioD[0] = MusloD.read()-90; // porque esta cambiado el signo
+    PrevioD[1] = RodillaD.read()-90;
     PrevioD[2] = 90 - TobilloD.read();
 }
 
-void CaderaM (int C){
-  Cadera.write(90-round(C/*i*M/90*/));
+void Torso (int C, int BD, int BI){
+  Cadera.write(100-C);
+  BrazoD.write(90-BD);
+  BrazoI.write(90+BI);
 }
 
 void TorsoRead (int PrevioT[3]){
     PrevioT[0] = 90 - Cadera.read(); // porque esta cambiado el signo
-    PrevioT[1] = BrazoD.read();
-    PrevioT[2] = BrazoI.read();
+    PrevioT[1] = 90 - BrazoD.read();
+    PrevioT[2] = BrazoI.read()-90;
 }
 //Prueba MegaSweep
 
@@ -256,9 +259,7 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
     //Mando la orden a los sevos
     PiernaD(ActualPD[0], ActualPD[1], ActualPD[2]);
     PiernaI(ActualPI[0], ActualPI[1], ActualPI[2]);
-    CaderaM(ActualTorso[0]);
-    BrazoD.write(ActualTorso[1]);
-    BrazoI.write(ActualTorso[2]);
+    Torso(ActualTorso[0],ActualTorso[1],ActualTorso[2]);
 //    Serial.print("Timetotal: ");
 //    Serial.print(Timelapse);
 //    Serial.print("-");
@@ -267,7 +268,7 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
 //    Serial.print(ActualPI[0]);
 //    Serial.print("-");
 //    Serial.println(i);
-    delay(50); //Delay acorde a Pasos
+    delay(2); //Delay acorde a Pasos
   }
 }
 
@@ -295,26 +296,26 @@ void Resta (int arr1[3],int arr2[3],int resultado[3]){ //Resta 2 Arrays componen
 void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, int TimeTotal){ //Actualiza la variable "Actual" 
   int Diff[3];
   Resta(Target, Previo, Diff);
-    Serial.print("Previo0: ");
-    Serial.print(Previo[0]);
-    Serial.print("// Previo1: ");
-    Serial.print(Previo[1]);
-    Serial.print("// Previo2: ");
-    Serial.print(Previo[2]);
-    Serial.println(" end Diff");
-    Serial.print("Tiempo Actual");
-    Serial.print(TiempoActual);
-    Serial.print("/");
-    Serial.println(TimeTotal);
+//    Serial.print("Previo0: ");
+//    Serial.print(Previo[0]);
+//    Serial.print("// Previo1: ");
+//    Serial.print(PrevioCaderaM[1]);
+//    Serial.print("// Previo2: ");
+//    Serial.print(Previo[2]);
+//    Serial.println(" end Diff");
+//    Serial.print("Tiempo Actual");
+//    Serial.print(TiempoActual);
+//    Serial.print("/");
+//    Serial.println(TimeTotal);
   for (int j=0; j<3; j++){
     
     Actual[j]= Previo[j] + round(TiempoActual*Diff[j]/(float)TimeTotal);
     
-    Serial.print("  ActualJ");
-    Serial.print(j);
-    Serial.print(": ");
-    Serial.print(Actual[j]);
+//    Serial.print("  ActualJ");
+//    Serial.print(j);
+//    Serial.print(": ");
+//    Serial.print(Actual[j]);
   }
-  Serial.println(" end Actual");
+//  Serial.println(" end Actual");
 }
 

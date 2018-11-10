@@ -50,19 +50,15 @@ void setup()
   // set servo to mid-point
   PiernaI(0,0,0);
   PiernaD(0,0,0);
-  CaderaM(0);
-      
-  Cadera.write(90);
-  BrazoI.write(90);
-  BrazoD.write(90);
+  Torso(0, 0,0);
   Cabeza.write(90);
 
 }
 
 void loop() { 
-  delay(500);
-  BrazoD.write(90-45);
-  BrazoI.write(90+45);
+//  delay(500);
+//  BrazoD.write(90-45);
+//  BrazoI.write(90+45);
   delay(1000);
   //espera 1 segundo desde que se conecta
   //Walking(/*'Izquierda',*/ 5);
@@ -71,7 +67,7 @@ void loop() {
 } 
 
 void Dance(char DanceMove){
-  int A=millis();
+  //int A=millis();
   
   Serial.println("sin switch");
   
@@ -79,7 +75,7 @@ void Dance(char DanceMove){
     case DANCE_MOVE_DURA:
     {
     int DireccionCadera=1;
-    float BPM = 95; //beats por minuto del ritmo que se baila
+    float BPM = 90; //beats por minuto del ritmo que se baila
     int dt = round((60.0/BPM)*1000); //Variable de tiempo para marcar el ritmo
     Serial.println("Dura");
     Serial.println("9");
@@ -90,28 +86,23 @@ void Dance(char DanceMove){
 //            //Cadera.write(110+DireccionCadera*30);
 //            delay(dt);
 //            Serial.println("intro");
-            A= millis();
+  //          A= millis();
             MegaSweep(0, 0, 0, 0, 0, 0, DireccionCadera*30, 0, 0, 0, dt);
-            A= millis()-A;
+           // A= millis()-A;
             Serial.println("Invierto cadera");
-            Serial.print("Tiempo Transcurrido: ");
-            Serial.println(A);
-            Serial.print("Tiempo Teorico: ");
-            Serial.println(dt);
+//            Serial.print("Tiempo Transcurrido: ");
+//            Serial.println(A);
+//            Serial.print("Tiempo Teorico: ");
+//            Serial.println(dt);
               
           }
           else {
             DireccionCadera = DireccionCadera*(-1);
-            //Cadera.write(110+DireccionCadera*30);
-            //BrazoI.write(90+DireccionCadera*45);
-            //BrazoD.write(90+DireccionCadera*45);
             Serial.println("Cadera y brazos");
             if (DireccionCadera>0){
-              MegaSweep(15, -15, 15, 15, -15, 15, DireccionCadera*30, DireccionCadera*45, DireccionCadera*45, 0, dt);
-              //PiernaI(15, -15, 15); //cambiado en func auxiliares
-              //PiernaD(15, -15, 15);
-            }
-            else{MegaSweep(-15, 15, -15, -15, 15, -15, DireccionCadera*30, DireccionCadera*45, DireccionCadera*45, 0, dt);}
+              MegaSweep(0, 0, 0, 7, -15, 8, DireccionCadera*30, DireccionCadera*45, -DireccionCadera*45, 0, dt);
+             }
+            else{MegaSweep(7, -15, 8, 0, 0, 0, DireccionCadera*30, DireccionCadera*45, -DireccionCadera*45, 0, dt);}
             
           }
        }
@@ -266,9 +257,9 @@ float sind(float angle){
 void PiernaI (int M, int R, int T){
     // WARNING!!
     // cualquier cambio de seteo, cambiar tambien en PiernaIRead!!
-    MusloI.write(90-round(M));
-    RodillaI.write(90+round(R));
-    TobilloI.write(90+round(T));
+    MusloI.write(90-M);
+    RodillaI.write(90+R);
+    TobilloI.write(90+T);
 
 }
 void PiernaIRead (int PrevioI[3]){
@@ -279,9 +270,9 @@ void PiernaIRead (int PrevioI[3]){
 
 void PiernaD (int M, int R, int T){
 
-    MusloD.write(90-round(M));
-    RodillaD.write(90-round(R));
-    TobilloD.write(90-round(T));
+    MusloD.write(90-M);
+    RodillaD.write(90-R);
+    TobilloD.write(90-T);
 
 }
 void PiernaDRead (int PrevioD[3]){
@@ -290,14 +281,16 @@ void PiernaDRead (int PrevioD[3]){
     PrevioD[2] = 90 - TobilloD.read();
 }
 
-void CaderaM (int C){
-  Cadera.write(90-round(C));
+void Torso (int C, int BD, int BI){
+  Cadera.write(100-C);
+  BrazoD.write(90-BD);
+  BrazoI.write(90+BI);
 }
 
 void TorsoRead (int PrevioT[3]){
     PrevioT[0] = 90 - Cadera.read(); // porque esta cambiado el signo
-    PrevioT[1] = BrazoD.read();
-    PrevioT[2] = BrazoI.read();
+    PrevioT[1] = 90 - BrazoD.read();
+    PrevioT[2] = BrazoI.read()-90;
 }
 //Prueba MegaSweep
 
@@ -305,6 +298,7 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   // Brazos (Arms) Derecho e izquierdo y cabeza
   // Angulos entre -90 y 90
   // TimeLapse: Tiempo en el cual se espera se realizen los movimientos en [ms]
+  int ElTimerloco= micros();
   int Pasos= round(Timelapse/2.0) ;//Defino que cada paso es de 2.0 ms
   int PrevioPD[3];
   int TargetPD[3]={Md, Rd, Td}; 
@@ -315,7 +309,7 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   int PrevioTorso[3];
   int TargetTorso[3]={Hip, Armd, Armi}; 
   int ActualTorso[3];
-
+  
   //Obtengo el valor de la posicion inicial del movimiento
   PiernaDRead(PrevioPD);
   PiernaIRead(PrevioPI);
@@ -331,24 +325,12 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
     //Mando la orden a los sevos
     PiernaD(ActualPD[0], ActualPD[1], ActualPD[2]);
     PiernaI(ActualPI[0], ActualPI[1], ActualPI[2]);
-    CaderaM(ActualTorso[0]);
-    BrazoD.write(ActualTorso[1]);
-    BrazoI.write(ActualTorso[2]);
-
-    delay(2); //Delay acorde a Pasos
+    Torso(ActualTorso[0],ActualTorso[1],ActualTorso[2]);
+    delayMicroseconds(2000-(micros()-ElTimerloco)-20); //Delay acorde a Pasos
+    ElTimerloco = micros();
   }
 }
 
-void SweepPD(int Time, int T1, int T2, int T3){ // barrido de pierna derecha. Entre la posicion actual y la de destino (Target), Actualiza la posicion a la que deberia estar
-
-  int Previo[3]={MusloD.read(), RodillaD.read(), TobilloD.read()};
-  int Target[3]={T1, T2, T3}; 
-  int Actual[3]={Previo};
-  for (int i=0; i<Time/2.0; i++){
-    Actualizar (Actual, Previo, Target, i, Time); 
-    PiernaD(Actual[0], Actual[1], Actual[2]);
-  }
-}
 
 void Resta (int arr1[3],int arr2[3],int resultado[3]){ //Resta 2 Arrays componente a componente y lo devuelve en "resultado"
   for (int i=0; i<3; i++){
