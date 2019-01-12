@@ -44,8 +44,8 @@ void setup()
   RodillaD.attach(A1); 
   Cadera.attach(A6); // Digital 4
   BrazoI.attach(A7); // Digital 6
-  BrazoD.attach(A9); // Digital 8
-  Cabeza.attach(A8); // Digital 9
+  BrazoD.attach(A8); // Digital 8
+  Cabeza.attach(A9); // Digital 9
 
   // set servo to mid-point
   PiernaI(0,0,0);
@@ -67,7 +67,7 @@ void loop() {
 } 
 
 void Dance(char DanceMove){
-  //int A=millis();
+  int A=millis();
   
   Serial.println("sin switch");
   
@@ -83,17 +83,17 @@ void Dance(char DanceMove){
         for (int j=1; j<15; j++){
           if (i==1){
             DireccionCadera = DireccionCadera*(-1);
-//            //Cadera.write(110+DireccionCadera*30);
-//            delay(dt);
-//            Serial.println("intro");
-  //          A= millis();
+            //Cadera.write(110+DireccionCadera*30);
+            delay(dt);
+            Serial.println("intro");
+            A= millis();
             MegaSweep(0, 0, 0, 0, 0, 0, DireccionCadera*30, 0, 0, 0, dt);
-           // A= millis()-A;
+            A= millis()-A;
             Serial.println("Invierto cadera");
-//            Serial.print("Tiempo Transcurrido: ");
-//            Serial.println(A);
-//            Serial.print("Tiempo Teorico: ");
-//            Serial.println(dt);
+            Serial.print("Tiempo Transcurrido: ");
+            Serial.println(A);
+            Serial.print("Tiempo Teorico: ");
+            Serial.println(dt);
               
           }
           else {

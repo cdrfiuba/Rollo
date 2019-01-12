@@ -36,13 +36,13 @@ void setup() {
   RodillaD.attach(A1); 
   Cadera.attach(A6); // Digital 4
   BrazoI.attach(A7); // Digital 6
-  BrazoD.attach(A9); // Digital 8
-  Cabeza.attach(A8); // Digital 9
+  BrazoD.attach(A8); // Digital 8
+  Cabeza.attach(A9); // Digital 9
 
   // set servo to mid-point
   PiernaI(0,0,0);
   PiernaD(0,0,0);
-  Torso(0, 0,0);
+  Torso(0, 45,45);
   //CaderaM(0);
 
 //  Cadera.write(90);
@@ -61,15 +61,15 @@ void loop(){
 //  R03 = Identidad;
 
   
-
-  delay (1500);
-  MegaSweep(30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 1000);
-  delay(10000);
-  MegaSweep(-30, -50, -90, 90, 30, 90, -45, 30, 30, 30, 500);
+//MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
+  delay (1000);
+  MegaSweep(30, 60, 30, 00, 00, 00, 45, 45, 00, 00, 1000);
   delay(1000);
-  MegaSweep(30, 30, 30, 30, 30, -30, 30, 30, -30, 30, 2000);
-  delay(1000);
-  MegaSweep(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 50);
+  MegaSweep(00, 00, 00, 30, 60, 30, -45, 00, 45, 30, 500);
+ // delay(1000);
+  //MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 2000);
+  //delay(5000);
+  //MegaSweep(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 50);
   //Serial.println(Matriz, DEC);
   //Matrix.Print((mtx_type*)DH2, 3, 3, "DH");
   //int R[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
