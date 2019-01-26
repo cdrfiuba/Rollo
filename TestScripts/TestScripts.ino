@@ -28,7 +28,7 @@ Servo Cabeza;
 void setup() {
         Serial.begin(115200);     // opens serial port, sets data rate to 9600 bps
         //Angulos = Angulos./(180/pi);
-          MusloI.attach(A5);
+  MusloI.attach(A5);
   TobilloI.attach(A3);
   RodillaI.attach(A4);
   MusloD.attach(A2); 
@@ -62,8 +62,8 @@ void loop(){
 
   
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
-  delay (1000);
-  MegaSweep(30, 60, 30, 00, 00, 00, 45, 45, 00, 00, 1000);
+  delay (5000);
+  MegaSweep(30, 90, 30, 00, 00, 00, 45, 45, 00, 00, 1000);
   delay(1000);
   MegaSweep(00, 00, 00, 30, 60, 30, -45, 00, 45, 30, 500);
  // delay(1000);
@@ -225,6 +225,7 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   // Angulos entre -90 y 90
   // TimeLapse: Tiempo en el cual se espera se realizen los movimientos en [ms]
   
+  int ElTimerloco= micros();
   int Pasos= round(Timelapse/2.0) ;//Defino que cada paso es de 2.0 ms
   int PrevioPD[3];
   int TargetPD[3]={Md, Rd, Td}; 
@@ -244,31 +245,17 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   for (int i=1; i<Pasos; i++){
     
     //Obtengo la nueva posicion acorde al progreso
-    Serial.println();
-    Serial.println();
-    Serial.println("Pierna Derecha");
-//    Serial.print("ActualPiernaD 0:");
-//    Serial.print(ActualPD[0]);
-//    Serial.print("Previo PD 0: ");
-//    Serial.print(PrevioPD[0]);
     Actualizar (ActualPD, PrevioPD, TargetPD, i, Pasos);
-    Serial.println("Pierna Izquierda:");
     Actualizar (ActualPI, PrevioPI, TargetPI, i, Pasos);
-    Serial.println("Torso:");
     Actualizar (ActualTorso, PrevioTorso, TargetTorso, i, Pasos);
+
     //Mando la orden a los sevos
     PiernaD(ActualPD[0], ActualPD[1], ActualPD[2]);
     PiernaI(ActualPI[0], ActualPI[1], ActualPI[2]);
     Torso(ActualTorso[0],ActualTorso[1],ActualTorso[2]);
-//    Serial.print("Timetotal: ");
-//    Serial.print(Timelapse);
-//    Serial.print("-");
-//    Serial.print(Pasos);
-//    Serial.print("-");
-//    Serial.print(ActualPI[0]);
-//    Serial.print("-");
-//    Serial.println(i);
-    delay(2); //Delay acorde a Pasos
+    delayMicroseconds(2000-(micros()-ElTimerloco)-20); //Delay acorde a Pasos
+ //   delay(100);
+    ElTimerloco = micros();
   }
 }
 
@@ -309,8 +296,21 @@ void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, 
 //    Serial.println(TimeTotal);
   for (int j=0; j<3; j++){
     
-    Actual[j]= Previo[j] + round(TiempoActual*Diff[j]/(float)TimeTotal);
-    
+    Actual[j]= Previo[j] + round(TiempoActual*(float)Diff[j]/TimeTotal);
+//    if (j==1){
+//      Serial.print("  ActualJ ");
+//      Serial.print(Actual[j]);
+//      Serial.print(" = PreviolJ ");
+//      Serial.print(Previo[j]);
+//      Serial.print(" +( Actual ");
+//      Serial.print(TiempoActual);
+//      Serial.print(" *Diff ");
+//      Serial.print(Diff[j]);
+//      Serial.print(" / Total");
+//      Serial.print(TimeTotal);
+//      Serial.println("  )");
+//      
+//    }
 //    Serial.print("  ActualJ");
 //    Serial.print(j);
 //    Serial.print(": ");

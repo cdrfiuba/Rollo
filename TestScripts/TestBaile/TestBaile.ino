@@ -342,7 +342,7 @@ void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, 
   int Diff[3];
   Resta(Target, Previo, Diff);
   for (int j=0; j<3; j++){
-    Actual[j]= Previo[j] + round(TiempoActual*Diff[j]/(float)TimeTotal);
+    Actual[j]= Previo[j] + round((float)TiempoActual*Diff[j]/TimeTotal);
   }
 }
 
