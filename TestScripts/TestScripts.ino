@@ -52,110 +52,124 @@ void setup() {
 }
 
 void loop(){
-//  angulos=Angular(Angulos);
-//for (i=1; i=3; i++){
-//    A=A*{{cosd(angulos(i)), 
-//  Serial.println(Matriz[3][0], DEC);
-//  Serial.println(DH[1][0], DEC);
-//  Serial.println(Matriz[3][2], DEC);
-//  R03 = Identidad;
-
   
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
   delay (5000);
-  MegaSweep(30, 90, 30, 00, 00, 00, 45, 45, 00, 00, 1000);
+  //MegaSweep(30, 90, 30, 00, 00, 00, 45, 45, 00, 00, 1000);
+  Walking(1);
   delay(1000);
-  MegaSweep(00, 00, 00, 30, 60, 30, -45, 00, 45, 30, 500);
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 45, 45, 00, 2000);
  // delay(1000);
   //MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 2000);
   //delay(5000);
-  //MegaSweep(90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 50);
-  //Serial.println(Matriz, DEC);
-  //Matrix.Print((mtx_type*)DH2, 3, 3, "DH");
-  //int R[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
-  //for (int i= 0: i=2; i++){
-    //mtx_type R0i={{cos(Angulos[i]), -sin(Angulos[i]), 0, DH[i][2]*cos(Angulos[i])}, {sin(Angulos[i]), cos(Angulos[i]), 0, DH[i][2]*sin(Angulos[i])}, {0, 0, 1,0}, {0, 0, 0, 1}};
-    //Matrix.Multiply((mtx_type*)R, (mtx_type*), N, N, N, (mtx_type*)C);}
-}
-//float  Angular(int Grados[3]){
-//  float Radianes[3];
-//  for (int i=0; i=2; i++){
-//    Radianes[i]=Grados[i]*M_PI/180;
-//  }
-//  return Radianes;
-//}
-  
-  
-//  R(i-1,i)={{cos(Angulos[i]), -sin(Angulos[i]), 0, DH[i][2]*cos(Angulos[i])}, {sin(Angulos[i]), cos(Angulos[i]), 0, DH[i][2]*sin(Angulos[i])}, {0, 0, 1,0}, {0, 0, 0, 1}};
-//R03 = Identidad,
-//for (int i=0; i=2, i++){
-  //Ri={{cos(Angulos[i]), -sin(Angulos[i]), 0, DH[i][2]*cos(Angulos[i])}, {sin(Angulos[i]), cos(Angulos[i]), 0, DH[i][2]*sin(Angulos[i])}, {0, 0, 1,0}, {0, 0, 0, 1}};
-  //R03= {{R03[1][1]*Ri[1][1]+R03[1][2]*Ri[2][1], R03[1][1]*Ri[1][2]+R03[1][2]*Ri[2][2], 0,R03[1][1]*Ri[1][4]+R03[1][2]*Ri[2][4]+R03[1][4]}, {{R03[2][1]*Ri[1][1]+R03[2][2]*Ri[2][1], R03[2][1]*Ri[1][2]+R03[2][2]*Ri[2][2], 0,R03[2][1]*Ri[1][4]+R03[2][2]*Ri[2][4]+R03[2][4]}, {0, 0, 1,0}, {0, 0, 0, 1}};
-  
-  
-  
-  
-//float Directo(int Angulos[3], float R03[][4]){
-//   //Modifica la matriz de rotacion y devuelve la POSE
-//  int R[4][4]; // matriz intermedia para los calculos
-//  //float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}; // Matriz de rotacion acumulada
-//  float Ri[4][4]; // matriz de rotacion del angulo i
-//  float POSE[4];
-//  for (int j=0; j=3; j++){
-//      for (int k=0; k=3; k++){
-//        if (j==k)R03[j][k]=1;
-//          else R03[j][k]=0;
-//      }
-//  }
-//      
-//  for (int i=0; i=2; i++){
-//    Ri[0][0]=cos(Angulos[i]);
-//    Ri[0][1]=-sin(Angulos[i]);
-//    Ri[0][3]=DH[i][2]*cos(Angulos[i]);
-//    Ri[1][0]=sin(Angulos[i]);
-//    Ri[1][1]=cos(Angulos[i]);
-//    Ri[1][3]=DH[i][2]*sin(Angulos[i]);
-//        
-//    R[0][0]= R03[0][0]*Ri[0][0]+R03[0][1]*Ri[1][0];
-//    R[0][1]= R03[0][0]*Ri[0][1]+R03[0][1]*Ri[1][1];
-//    R[0][3]= R03[0][0]*Ri[0][3]+R03[0][1]*Ri[1][3]+R03[0][3];
-//    R[1][0]= R03[1][0]*Ri[0][0]+R03[1][1]*Ri[1][0];
-//    R[1][1]= R03[1][0]*Ri[0][1]+R03[1][1]*Ri[1][1];
-//    R[1][3]= R03[1][0]*Ri[0][3]+R03[1][1]*Ri[1][3]+R03[1][3];
-//    
-//    for (int j=0; j=3; j++){
-//      for (int k=0; k=3; k++){
-//        R03[j][k]=R[j][k];
-//      };
-//    };
-//  };
-//  POSE[1]= R03[1][4]; 
-//  POSE[2]= R03[2][4];
-//  POSE[3]= Angulos[1]+Angulos[2]+Angulos[3];
-//  if (Angulos[2] <0) POSE[4]= -1;
-//    else POSE[4]= 1;
-//    
-//// return R03;
-// } 
 
-void multipmatrix(){
-    for (int i=0; i=2; i++){
-    Ri[0][0]=cos(Angulos[i]);
-    Ri[0][1]=-sin(Angulos[i]);
-    Ri[0][3]=DH[i][2]*cos(Angulos[i]);
-    Ri[1][0]=sin(Angulos[i]);
-    Ri[1][1]=cos(Angulos[i]);
-    Ri[1][3]=DH[i][2]*sin(Angulos[i]);
-        
-    R03[0][0]= R03[0][0]*Ri[0][0]+R03[0][1]*Ri[1][0];
-    R03[0][1]= R03[0][0]*Ri[0][1]+R03[0][1]*Ri[1][1];
-    R03[0][3]= R03[0][0]*Ri[0][3]+R03[0][1]*Ri[1][3]+R03[0][3];
-    R03[1][0]= R03[1][0]*Ri[0][0]+R03[1][1]*Ri[1][0];
-    R03[1][1]= R03[1][0]*Ri[0][1]+R03[1][1]*Ri[1][1];
-    R03[1][3]= R03[1][0]*Ri[0][3]+R03[1][1]*Ri[1][3]+R03[1][3];
-    
-  };
 }
+
+//Funcion Caminata
+void Walking(int pasos){
+
+  int cont = 0;
+  int paso_actual;
+  const int dt = 5000;
+  
+  // CONDICION PIES EN EL PISO: SUMA DE LOS ANGULOS DE PIERNA D Y PIERNA I DEBEN SER IGUALES
+  // SI ESTO NO SE CUMPLE EL TORSO QUEDA CON 2 CONDICIONES DISTINTAS DE INCLINACION LO CUAL ES INESTABLE Phi=0
+  //siempre empieza con pie derecho
+  if (pasos>0){
+    if (pasos == 1){pasos = 2;};
+    // Primer paso empiezo en 1-0
+
+    //movimiento 1-1
+    MegaSweep(15, 45, 15, -05, 05, 05, -45, 00, 00, 00, 500);
+    delay(1000); //delay de debug
+    //movimiento 1-2
+    MegaSweep(30, 60, 30, -05, 05, 05, -60, 00, 00, 00, 500);
+    delay(1000); //delay de debug
+    //movimiento 1-3
+    MegaSweep(75, 55, 20, -30, 15, 05, 10, 00, 00, 00, 500);
+
+//HARCODED EXIT -- borrar
+    pasos =0;
+
+//    delay (dt);
+//    Cadera.write(90);
+//    PiernaD( -20, 10, 30);
+//    PiernaI(60, 60, 30);    
+//    pie_delantero = 1;
+//    delay (dt);
+    
+//    //pasos continuos
+//    while (cont < pasos-2){
+//      if (pie_delantero == 1){
+//        Cadera.write(120);
+//        PiernaD(-30, 10, -30);
+//        PiernaI(40, 30, 0);
+//        delay (dt);
+//        Cadera.write(150);
+//        PiernaI(20, 00, 0);
+//        PiernaD(50, 60, 0);
+//        delay (dt);
+//        Cadera.write(90);
+//        PiernaI( -20, 10, 30);
+//        PiernaD(60, 60, 30);    
+//        pie_delantero = 2;
+//        delay (dt);
+//        cont++;
+//      }
+//      else{
+//        Cadera.write(60);
+//        PiernaI(-30, 10, -30);
+//        PiernaD(40, 30, 0);
+//        delay (dt);
+//        Cadera.write(30);
+//        PiernaD(20, 00, 0);
+//        PiernaI(50, 60, 0);
+//        delay (dt);
+//        Cadera.write(90);
+//        PiernaD( -20, 10, 30);
+//        PiernaI(60, 60, 30);    
+//        pie_delantero = 1;
+//        delay (dt);
+//        cont++;
+//      }
+//    }
+//      //detencion
+//      if (pie_delantero == 1){
+//        Cadera.write(120);
+//        PiernaD(-30, 10, -30);
+//        PiernaI(40, 30, 0);
+//        delay (dt);
+//        Cadera.write(150);
+//        PiernaI(10, 00, 0);
+//        PiernaD(20, 50,30);
+//        delay (dt);
+//        Cadera.write(90);
+//        PiernaD( 0, 0, 0);
+//        PiernaI(00, 00, 00);    
+//        pie_delantero = 2;
+//        delay (dt);
+//      }
+//      else{
+//        Cadera.write(30);
+//        PiernaI(-30, 10, -30);
+//        PiernaD(40, 30, 0);
+//        delay (dt);
+//        Cadera.write(60);
+//        PiernaD(10, 00, 0);
+//        PiernaI(20, 50,30);
+//        delay (dt);
+//        Cadera.write(90);
+//        PiernaI( 0, 0, 0);
+//        PiernaD(00, 00, 00);    
+//        pie_delantero = 2;
+//        delay (dt);
+//      }
+   }
+}
+  
+  
+
+
 
 // Funciones Auxiliares cosd y sind
 float cosd(float angle){
