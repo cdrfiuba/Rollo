@@ -68,9 +68,9 @@ void loop() {
   BrazoD.write(90);
   Cabeza.write(90);
   delay(2000); // espera para apagar o reposicionar
-  BrazoD.write(20);
+  TobilloD.write(20);
   delay(1000);
-  BrazoD.write(160);
+  TobilloD.write(160);
 } 
 
 

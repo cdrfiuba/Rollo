@@ -52,7 +52,7 @@ void setup() {
 }
 
 void loop(){
-  
+/*  
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
   delay (3000);
   MegaSweep(30, 90, 30, -10, 00, 20, -45, 45, 00, 00, 1000);
@@ -76,34 +76,60 @@ void loop(){
   MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 1000);
   delay(100);
   
-
+*/
 }
 
+
+
 //Funcion Caminata
-void Walking(int pasos){
-
-  int cont = 0;
-  int paso_actual;
-  const int dt = 5000;
-  
-  // CONDICION PIES EN EL PISO: SUMA DE LOS ANGULOS DE PIERNA D Y PIERNA I DEBEN SER IGUALES
-  // SI ESTO NO SE CUMPLE EL TORSO QUEDA CON 2 CONDICIONES DISTINTAS DE INCLINACION LO CUAL ES INESTABLE Phi=0
-  //siempre empieza con pie derecho
-  if (pasos>0){
-    if (pasos == 1){pasos = 2;};
-    // Primer paso empiezo en 1-0
-
-    //movimiento 1-1
-    MegaSweep(15, 45, 15, -05, 05, 05, -45, 00, 00, 00, 500);
-    delay(1000); //delay de debug
-    //movimiento 1-2
-    MegaSweep(30, 60, 30, -05, 05, 05, -60, 00, 00, 00, 500);
-    delay(1000); //delay de debug
+//void Walking(int pasos){
+//
+//  int cont = 0;
+//  int paso_actual;
+//  const int dt = 5000;
+//  
+//  // CONDICION PIES EN EL PISO: SUMA DE LOS ANGULOS DE PIERNA D Y PIERNA I DEBEN SER IGUALES
+//  // SI ESTO NO SE CUMPLE EL TORSO QUEDA CON 2 CONDICIONES DISTINTAS DE INCLINACION LO CUAL ES INESTABLE Phi=0
+//  //siempre empieza con pie derecho
+//  if (pasos>0){
+//    if (pasos == 1){pasos = 2;};
+//    // Primer paso empiezo en 1-0
+//
+//    //movimiento 1-1
+//    MegaSweep(15, 45, 15, -05, 05, 05, -45, 00, 00, 00, 500);
+//    delay(1000); //delay de debug
+//    //movimiento 1-2
+//    MegaSweep(30, 60, 30, -05, 05, 05, -60, 00, 00, 00, 500);
+//    delay(1000); //delay de debugvoid SweepPD(int Time, int T1, int T2, int T3){ // barrido de pierna derecha. Entre la posicion actual y la de destino (Target), Actualiza la posicion a la que deberia estar
+//
+//  int Previo[3]={MusloD.read(), RodillaD.read(), TobilloD.read()};
+//  int Target[3]={T1, T2, T3}; 
+//  int Actual[3]={Previo};
+//  for (int i=0; i<Time/2.0; i++){
+//    Actualizar (Actual, Previo, Target, i, Time); 
+//    PiernaD(Actual[0], Actual[1], Actual[2]);
+//  }
+//}
+//}
     //movimiento 1-3
-    MegaSweep(75, 55, 20, -30, 15, 05, 10, 00, 00, 00, 500);
+//    MegaSweep(75, 55, 20, -30, 15, 05, 10, 00, 00, 00, 500);
 
 //HARCODED EXIT -- borrar
-    pasos =0;
+//    pasos =0;
+
+
+
+/*
+void SweepPD(int Time, int T1, int T2, int T3){ // barrido de pierna derecha. Entre la posicion actual y la de destino (Target), Actualiza la posicion a la que deberia estar
+
+  int Previo[3]={MusloD.read(), RodillaD.read(), TobilloD.read()};
+  int Target[3]={T1, T2, T3}; 
+  int Actual[3]={Previo};
+  for (int i=0; i<Time/2.0; i++){
+    Actualizar (Actual, Previo, Target, i, Time); 
+    PiernaD(Actual[0], Actual[1], Actual[2]);
+  }
+} */
 
 //    delay (dt);
 //    Cadera.write(90);
@@ -178,8 +204,8 @@ void Walking(int pasos){
 //        pie_delantero = 2;
 //        delay (dt);
 //      }
-   }
-}
+//   }
+
   
   
 
@@ -287,16 +313,6 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   }
 }
 
-void SweepPD(int Time, int T1, int T2, int T3){ // barrido de pierna derecha. Entre la posicion actual y la de destino (Target), Actualiza la posicion a la que deberia estar
-
-  int Previo[3]={MusloD.read(), RodillaD.read(), TobilloD.read()};
-  int Target[3]={T1, T2, T3}; 
-  int Actual[3]={Previo};
-  for (int i=0; i<Time/2.0; i++){
-    Actualizar (Actual, Previo, Target, i, Time); 
-    PiernaD(Actual[0], Actual[1], Actual[2]);
-  }
-}
 
 void Resta (int arr1[3],int arr2[3],int resultado[3]){ //Resta 2 Arrays componente a componente y lo devuelve en "resultado"
   for (int i=0; i<3; i++){
@@ -346,4 +362,3 @@ void Actualizar (int Actual[3], int Previo[3], int Target[3], int TiempoActual, 
   }
 //  Serial.println(" end Actual");
 }
-
