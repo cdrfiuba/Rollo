@@ -52,17 +52,17 @@ void setup() {
 }
 
 void loop(){
-/*  
+  
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
   delay (3000);
-  MegaSweep(30, 90, 30, -10, 00, 20, -45, 45, 00, 00, 1000);
+  MegaSweep(20, -20, 15, 00, 00, 00, -45, 00, 00, 00, 300); // parto de posicion de equilibrio
   //Walking(1);
   delay(100);
-  MegaSweep(45, 60, -10, 00, 00, 00, -30, 45, 45, 00, 1000);
+  MegaSweep(20, 00, -20, -10, 00, 10, -30, 00, 00, 00, 300);
   delay(100);
-  MegaSweep(20, 20, 20, 00, 00, 00, -15, 30, 30, 0, 1000);
+  MegaSweep(10, 00, 10, 10, 40, 10, -15, -30, 30, 0, 300);
   delay(100);
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 1000);
+  MegaSweep(00, 00, 00, 20, 60, 20, 00, 00, 30, 0, 300);
   delay(100);
 
 
@@ -76,7 +76,7 @@ void loop(){
   MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 1000);
   delay(100);
   
-*/
+
 }
 
 
