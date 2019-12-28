@@ -53,29 +53,31 @@ void setup() {
 
 void loop(){
   
-//MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time);
+//MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); // parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(20, -20, 15, 00, 00, 00, -45, 00, 00, 00, 300); // parto de posicion de equilibrio
-  //Walking(1);
-  delay(100);
-  MegaSweep(20, 00, -20, -10, 00, 10, -30, 00, 00, 00, 300);
-  delay(100);
-  MegaSweep(10, 00, 10, 10, 40, 10, -15, -30, 30, 0, 300);
-  delay(100);
-  MegaSweep(00, 00, 00, 20, 60, 20, 00, 00, 30, 0, 300);
-  delay(100);
+  MegaSweep(20, 20, -10, -5, 00, -5, -60, 00, 00, 00, 1000); // ESTA POSICION VA!!! (NO SE SI ES LA PRIMERA, PERO VA)
+  delay(1000);
+  // MegaSweep(40, 40, -00, -30, 00, -30, -15, 00, 00, 00, 1000);
+ /* //Walking(1);
+  //delay(100);
+  MegaSweep(20, 00, -20, -10, 00, 10, -15, 00, 00, 00, 200);
+  //delay(100);
+  MegaSweep(10, 00, 10, 10, 40, 10, -5, -30, 30, 0, 200);
+  //delay(100);
+  MegaSweep(00, 00, 00, 20, 60, 20, 00, 00, 30, 0, 200);
+  //delay(100);
 
 
-  MegaSweep(-10, 00, 20, 30, 90, 30, 45, 45, 00, 00, 1000);
-  //Walking(1);
-  delay(100);
-  MegaSweep(00, 00, 00, 45, 60, -10, 30, 45, 45, 00, 1000);
-  delay(100);
-  MegaSweep(00, 00, 00, 20, 20, 20, 15, 30, 30, 0, 1000);
-  delay(100);
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 1000);
-  delay(100);
-  
+  MegaSweep(-10, 00, 20, 30, 90, 30, 30, 45, 00, 00, 200);
+  //Walking(1);MegaSweep(20, 00, -20, -10, 00, 10, -15, 00, 00, 00, 200);
+  //delay(100);
+  MegaSweep(00, 00, 00, 45, 60, -10, 15, 45, 45, 00, 200);
+  //delay(100);
+  MegaSweep(00, 00, 00, 20, 20, 20, 5, 30, 30, 0, 200);
+  //delay(100);
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 30, 30, 0, 200);
+  //delay(100);
+  */
 
 }
 
