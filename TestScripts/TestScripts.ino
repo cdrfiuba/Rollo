@@ -52,12 +52,29 @@ void setup() {
 }
 
 void loop(){
-  
-//MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); // parto de posicion de equilibrio
+  //https://www.youtube.com/watch?v=G8Veye-N0A4 
+//MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 200);// 0 parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(20, 20, -10, -5, 00, -5, -60, 00, 00, 00, 1000); // ESTA POSICION VA!!! (NO SE SI ES LA PRIMERA, PERO VA)
-  delay(1000);
-  // MegaSweep(40, 40, -00, -30, 00, -30, -15, 00, 00, 00, 1000);
+  MegaSweep(00, 00, 10, 00, 00, 10, 00, 00, 00, 00, 500); // 1 levemente inclinado para adelante
+  delay (1000);// ok
+  MegaSweep(20, 10, -10, -10, 00, -10, -30, 00, 00, 00, 500); // 2 doblo la pierna derecha para levantarla del piso
+  delay (1000);
+  MegaSweep(40, 40, 00, -10, 00, -10, -60, 00, 00, 00, 500); // 3 aplano el pie derechor y enderezo el torso. 
+  delay (1000);
+  MegaSweep(40, 40, 00, -20, 00, -20, -30, 00, 00, 00, 500); // 4 estiro la pierna para dar el paso
+  delay (1000);
+  MegaSweep(20, 00, -20, 00, 00, 05, 00, 00, 00, 00, 500); // 5 levemente inclinado para adelante
+  delay (1000);
+  //MegaSweep(00, 00, 05, 00, 00, 05, 30, 00, 00, 00, 500); // 6 levemente inclinado para adelante
+  delay (1000);
+  //MegaSweep(00, 00, 05, 00, 00, 05, 60, 00, 00, 00, 500); // 7 levemente inclinado para adelante
+  delay (1000);
+  
+  //MegaSweep(20, 20, -10, -5, 00, -5, -60, 00, 00, 00, 1000); // ESTA POSICION VA!!! (NO SE SI ES LA PRIMERA, PERO VA) kd era -60
+  //MegaSweep(20, 20, -10, -5, 00, -5, -30, 00, 00, 00, 1000); // 
+  //delay(1000);
+  //MegaSweep(40, 40, -20, -30, 00, -30, -60, 00, 00, 00, 1000);
  /* //Walking(1);
   //delay(100);
   MegaSweep(20, 00, -20, -10, 00, 10, -15, 00, 00, 00, 200);
@@ -239,13 +256,13 @@ float sind(float angle){
 void PiernaI (int M, int R, int T){
     // WARNING!!
     // cualquier cambio de seteo, cambiar tambien en PiernaIRead!!
-    MusloI.write(90-M);
+    MusloI.write(90-M+10); //tiene un offset de +10
     RodillaI.write(90-R);
     TobilloI.write(90+T);
 
 }
 void PiernaIRead (int PrevioI[3]){
-    PrevioI[0] = 90 - MusloI.read(); // porque esta cambiado el signo
+    PrevioI[0] = 90 - MusloI.read()+10; // porque esta cambiado el signo
     PrevioI[1] = 90 - RodillaI.read();
     PrevioI[2] = TobilloI.read() - 90;
 }
