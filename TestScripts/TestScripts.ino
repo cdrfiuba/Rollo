@@ -1,4 +1,4 @@
-//#include <MatrixMath.h>
+ou//#include <MatrixMath.h>
 #include <math.h>
 #include <Servo.h> 
 
@@ -258,26 +258,26 @@ void PiernaI (int M, int R, int T){
     // cualquier cambio de seteo, cambiar tambien en PiernaIRead!!
     MusloI.write(90-M+10); //tiene un offset de +10
     RodillaI.write(90-R);
-    TobilloI.write(90+T);
+    TobilloI.write(90+T-10);
 
 }
 void PiernaIRead (int PrevioI[3]){
     PrevioI[0] = 90 - MusloI.read()+10; // porque esta cambiado el signo
     PrevioI[1] = 90 - RodillaI.read();
-    PrevioI[2] = TobilloI.read() - 90;
+    PrevioI[2] = TobilloI.read() - 90+10;
 }
 
 void PiernaD (int M, int R, int T){
 
     MusloD.write(90+M);
     RodillaD.write(90+R);
-    TobilloD.write(90-T);
+    TobilloD.write(90-T+10);
 
 }
 void PiernaDRead (int PrevioD[3]){
     PrevioD[0] = MusloD.read()-90; // porque esta cambiado el signo
     PrevioD[1] = RodillaD.read()-90;
-    PrevioD[2] = 90 - TobilloD.read();
+    PrevioD[2] = 90 - TobilloD.read()+10;
 }
 
 void Torso (int C, int BD, int BI){
