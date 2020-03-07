@@ -1,4 +1,4 @@
-ou//#include <MatrixMath.h>
+//#include <MatrixMath.h>
 #include <math.h>
 #include <Servo.h> 
 
@@ -10,6 +10,7 @@ float angulos[3];
 float Angulos[3]={30*M_PI/180, 20*M_PI/180, -10*M_PI/180};
 float Ri[4][4];
 float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0},{0, 0, 0, 1}};
+const int deltat = 40; //ms
 
 Servo MusloI;
 Servo RodillaI;
@@ -54,22 +55,27 @@ void setup() {
 void loop(){
   //https://www.youtube.com/watch?v=G8Veye-N0A4 
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 200);// 0 parto de posicion de equilibrio
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00);// 0 parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(00, 00, 10, 00, 00, 10, 00, 00, 00, 00, 500); // 1 levemente inclinado para adelante
-  delay (1000);// ok
-  MegaSweep(20, 10, -10, -10, 00, -10, -30, 00, 00, 00, 500); // 2 doblo la pierna derecha para levantarla del piso
-  delay (1000);
-  MegaSweep(40, 40, 00, -10, 00, -10, -60, 00, 00, 00, 500); // 3 aplano el pie derechor y enderezo el torso. 
-  delay (1000);
-  MegaSweep(40, 40, 00, -20, 00, -20, -30, 00, 00, 00, 500); // 4 estiro la pierna para dar el paso
-  delay (1000);
-  MegaSweep(20, 00, -20, 00, 00, 05, 00, 00, 00, 00, 500); // 5 levemente inclinado para adelante
-  delay (1000);
-  //MegaSweep(00, 00, 05, 00, 00, 05, 30, 00, 00, 00, 500); // 6 levemente inclinado para adelante
-  delay (1000);
-  //MegaSweep(00, 00, 05, 00, 00, 05, 60, 00, 00, 00, 500); // 7 levemente inclinado para adelante
-  delay (1000);
+  MegaSweep(00, 00, 5, 00, 00, 5, 00, 00, 00, 00, 25*deltat); // 1 levemente inclinado para adelante
+  //delay (1000);// ok
+  MegaSweep(20, 54, 00, 00, 00, 5, -20, 00, 00, 00, 13*deltat); // 2 doblo la pierna derecha para levantarla del piso
+  //delay (1000);
+  MegaSweep(30, 59, -5, 00, 00, 10, -30, 00, 00, 00, 7*deltat); // 3 aplano el pie derechor y enderezo el torso. 
+  //delay (1000);
+  MegaSweep(40, 36, 8, -10, 00, -10, -40, 00, 00, 00, 15*deltat); // 4 estiro la pierna para dar el paso
+  //delay (1000);
+  MegaSweep(30, 00, 00, -10, 00, 15, -40, 00, 00, 00, 12*deltat); // 5 levemente inclinado para adelante
+  //delay (1000);
+  MegaSweep(30, 00, 10, -20, 10, 00, -30, 00, 00, 00, 8*deltat); // 6 levemente inclinado para adelante
+  //delay (1000);
+  MegaSweep(25, 00, -15, -20, 20, -20, -10, 00, 00, 00, 10*deltat); // 7 levemente inclinado para adelante
+
+  MegaSweep(00, 00, -10, 00, 70, -30, 30, 00, 00, 00, 10*deltat); // 6 levemente inclinado para adelante
+  //delay (1000);
+  MegaSweep(-5, 00, 00, 40, 60, -10, 60, 00, 00, 00, 11*deltat); // 6 levemente inclinado para adelante
+  //delay (1000);
+  delay (3000);
   
   //MegaSweep(20, 20, -10, -5, 00, -5, -60, 00, 00, 00, 1000); // ESTA POSICION VA!!! (NO SE SI ES LA PRIMERA, PERO VA) kd era -60
   //MegaSweep(20, 20, -10, -5, 00, -5, -30, 00, 00, 00, 1000); // 
