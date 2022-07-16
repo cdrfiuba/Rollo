@@ -10,7 +10,7 @@ float angulos[3];
 float Angulos[3]={30*M_PI/180, 20*M_PI/180, -10*M_PI/180};
 float Ri[4][4];
 float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0},{0, 0, 0, 1}};
-const int deltat = 40; //ms
+const int deltat = 10; //ms
 
 Servo MusloI;
 Servo RodillaI;
@@ -308,10 +308,10 @@ void MegaSweep (int Md, int Rd, int Td, int Mi, int Ri, int Ti, int Hip, int Arm
   int Pasos= round(Timelapse/2.0) ;//Defino que cada paso es de 2.0 ms
   int PrevioPD[3];
   int TargetPD[3]={Md, Rd, Td}; 
-  int ActualPD[3]={PrevioPD};
+  int ActualPD[3] = {PrevioPD};
   int PrevioPI[3];
   int TargetPI[3]={Mi, Ri, Ti}; 
-  int ActualPI[3]={PrevioPI};
+  int ActualPI[3]= {PrevioPI};
   int PrevioTorso[3];
   int TargetTorso[3]={Hip, Armd, Armi}; 
   int ActualTorso[3];
