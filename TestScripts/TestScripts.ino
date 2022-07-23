@@ -10,8 +10,8 @@ float angulos[3];
 float Angulos[3]={30*M_PI/180, 20*M_PI/180, -10*M_PI/180};
 float Ri[4][4];
 float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0},{0, 0, 0, 1}};
-const int deltat = 50; //ms
-const int delaytime = 000; //ms
+const int deltat = 40; //ms
+const int delaytime = 1000; //ms
 
 Servo MusloI;
 Servo RodillaI;
@@ -56,41 +56,21 @@ void setup() {
 void loop(){
   //https://www.youtube.com/watch?v=G8Veye-N0A4 
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00);// 0 parto de posicion de equilibrio
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat);// 0 parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(00, 00, 5, 00, 00, 5, 00, 00, 00, 00, 25*deltat); // 1 levemente inclinado para adelante
-  delay (delaytime);// ok
-  MegaSweep(20, 54, 00, 00, 00, 5, 00, 00, 00, 00, 13*deltat); // 2 doblo la pierna derecha para levantarla del piso
-  //delay (1000);
+  MegaSweep(00, 00, 10, 00, 00, -10, 00, 00, 00, 00, 10*deltat); //  1
   delay (delaytime);
-  MegaSweep(30, 59, -5, 00, 00, 10, 00, 00, 00, 00, 7*deltat); // 3 aplano el pie derechor y enderezo el torso. 
-  //delay (1000);
+  MegaSweep(00, 00, 15, 00, 00, -15, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(40, 36, 8, -10, 00, -10, 00, 00, 00, 00, 15*deltat); // 4 estiro la pierna para dar el paso
-  //delay (1000);
+  MegaSweep(00, 00, 20, 00, 00, -20, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(30, 00, 00, -10, 00, 15, 00, 00, 00, 00, 12*deltat); // 5 levemente inclinado para adelante
-  //delay (1000);
+  MegaSweep(00, 00, 25, 00, 00, -25, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(30, 00, -10, -20, 10, 00, 00, 00, 00, 00, 8*deltat); // 6 levemente inclinado para adelante
-  //delay (1000);
+  MegaSweep(00, 00, 30, 00, 00, -30, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(25, 00, -15, -20, 20, -20, -00, 00, 00, 00, 10*deltat); // 7 levemente inclinado para adelante
-  delay (delaytime);
-  MegaSweep(00, 00, -10, 00, 70, -30, 00, 00, 00, 00, 10*deltat); // 8 levemente inclinado para adelante
-  //delay (1000);
-  delay (delaytime);
-  MegaSweep(-5, 00, 00, 40, 60, -10, 00, 00, 00, 00, 11*deltat); //  9
-  //delay (1000);
-  delay (delaytime);
-  MegaSweep(-12, 00, 25, 35, 20, -20, 00, 00, 00, 00, 10*deltat); //  10
-  //delay (1000);
-  delay (delaytime);
-  MegaSweep(-24, 00, 12, 25, 10, -30, 00, 00, 00, 00, 10*deltat); //  11
-  //delay (1000);
-  delay (delaytime);
-  MegaSweep(-18, 00, 15, 18, 15, -30, 00, 00, 00, 00, 10*deltat); //  12
-  //delay (1000);
+  //MegaSweep(00, 00, 15, 35, 10, 25, 00, 00, 00, 00, 10*deltat); //  3
+  //delay (delaytime);
+  //MegaSweep(00, 00, 05, 00, 00, 05, 00, 00, 00, 00, 10*deltat); //  4
   delay (delaytime);
   //MegaSweep(00, 00, -10, 00, 70, -30, 30, 00, 00, 00, 10*deltat);
   //MegaSweep(00, 70, -30, 00, 00, -10, 30, 00, 00, 00, 10*deltat); //  13

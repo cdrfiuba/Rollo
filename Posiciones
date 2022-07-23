@@ -18,3 +18,27 @@
 250 timestamps en 10 seg
 dt = 0,04ms
 
+empiezo de nuevo
+// primer paso
+0) 00 00 00, 00 00 00, 00 00 00, 00       timestamp
+1) 00 00 05, 00 00 05, 00 00 00, 00       10
+2) 00 00 08, 00 00 08, 00 00 00, 00       20
+3) 00 00 08, 25 10 15, 00 00 00, 00       30
+4) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+5) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+6) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+7) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+8) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+9) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+10) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+11) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+12) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+13) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+14) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+15) 0 0 0, 0 0 0, 0 0 0, 0       timestamp
+
+
+
+
+
+
