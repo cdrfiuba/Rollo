@@ -10,8 +10,10 @@ float angulos[3];
 float Angulos[3]={30*M_PI/180, 20*M_PI/180, -10*M_PI/180};
 float Ri[4][4];
 float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0},{0, 0, 0, 1}};
-const int deltat = 40; //ms
+const int deltat = 10; //ms
 const int delaytime = 1000; //ms
+const int maxus = 2400; //us
+const int minus = 400; //us
 
 Servo MusloI;
 Servo RodillaI;
@@ -30,16 +32,16 @@ Servo Cabeza;
 void setup() {
         Serial.begin(115200);     // opens serial port, sets data rate to 9600 bps
         //Angulos = Angulos./(180/pi);
-  MusloI.attach(A5);
-  TobilloI.attach(A3);
-  RodillaI.attach(A4);
-  MusloD.attach(A2); 
-  TobilloD.attach(A0); 
-  RodillaD.attach(A1); 
-  Cadera.attach(A6); // Digital 4
-  BrazoI.attach(A7); // Digital 6
-  BrazoD.attach(A8); // Digital 8
-  Cabeza.attach(A9); // Digital 9
+  MusloI.attach(A5, minus, maxus);
+  TobilloI.attach(A3, minus, maxus);
+  RodillaI.attach(A4, minus, maxus);
+  MusloD.attach(A2, minus, maxus); 
+  TobilloD.attach(A0, minus, maxus); 
+  RodillaD.attach(A1, minus, maxus); 
+  Cadera.attach(A6, minus, maxus); // Digital 4
+  BrazoI.attach(A7, minus, maxus); // Digital 6
+  BrazoD.attach(A8, minus, maxus); // Digital 8
+  Cabeza.attach(A9, minus, maxus); // Digital 9
 
   // set servo to mid-point
   PiernaI(0,0,0);
@@ -58,15 +60,19 @@ void loop(){
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
   MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat);// 0 parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(00, 00, 10, 00, 00, -10, 00, 00, 00, 00, 10*deltat); //  1
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  1
   delay (delaytime);
-  MegaSweep(00, 00, 15, 00, 00, -15, 00, 00, 00, 00, 10*deltat); //  2
+  MegaSweep(00, 90, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(00, 00, 20, 00, 00, -20, 00, 00, 00, 00, 10*deltat); //  2
+  MegaSweep(00, -90, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(00, 00, 25, 00, 00, -25, 00, 00, 00, 00, 10*deltat); //  2
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
-  MegaSweep(00, 00, 30, 00, 00, -30, 00, 00, 00, 00, 10*deltat); //  2
+  MegaSweep(00, 00, 00, 00, 90, 00, 00, 00, 00, 00, 10*deltat); //  2
+  delay (delaytime);
+  MegaSweep(00, 00, 00, 00, -90, 00, 00, 00, 00, 00, 10*deltat); //  2
+  delay (delaytime);
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
   //MegaSweep(00, 00, 15, 35, 10, 25, 00, 00, 00, 00, 10*deltat); //  3
   //delay (delaytime);
