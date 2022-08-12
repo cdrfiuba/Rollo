@@ -54,6 +54,8 @@ dt = 0,04ms
   delay (delaytime);
 
 
+Standing position: 00 00 00, 00 00 00, -50 -50 00
+
 empiezo de nuevo
 // primer paso
 0) 00 00 00, 00 00 00, 00 00 00, 00       timestamp

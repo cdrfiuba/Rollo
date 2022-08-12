@@ -58,21 +58,11 @@ void setup() {
 void loop(){
   //https://www.youtube.com/watch?v=G8Veye-N0A4 
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat);// 0 parto de posicion de equilibrio
+  MegaSweep(00, 00, -4, 00, 00, -4, 00, -55, -55, 00, 10*deltat);// 0 parto de posicion de equilibrio
   delay (3000);
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  1
+ 
+  //MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  1
   delay (delaytime);
-  MegaSweep(00, 90, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
-  delay (delaytime);
-  MegaSweep(00, -90, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
-  delay (delaytime);
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
-  delay (delaytime);
-  MegaSweep(00, 00, 00, 00, 90, 00, 00, 00, 00, 00, 10*deltat); //  2
-  delay (delaytime);
-  MegaSweep(00, 00, 00, 00, -90, 00, 00, 00, 00, 00, 10*deltat); //  2
-  delay (delaytime);
-  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  2
   delay (delaytime);
   //MegaSweep(00, 00, 15, 35, 10, 25, 00, 00, 00, 00, 10*deltat); //  3
   //delay (delaytime);
@@ -270,37 +260,37 @@ void PiernaI (int M, int R, int T){
     // WARNING!!
     // cualquier cambio de seteo, cambiar tambien en PiernaIRead!!
     MusloI.write(90-M+10); //tiene un offset de +10
-    RodillaI.write(90-R);
-    TobilloI.write(90+T-10);
+    RodillaI.write(90-R-10);
+    TobilloI.write(90+T-0);
 
 }
 void PiernaIRead (int PrevioI[3]){
     PrevioI[0] = 90 - MusloI.read()+10; // porque esta cambiado el signo
-    PrevioI[1] = 90 - RodillaI.read();
-    PrevioI[2] = TobilloI.read() - 90+10;
+    PrevioI[1] = 90 - RodillaI.read() -10;
+    PrevioI[2] = TobilloI.read() - 90;
 }
 
 void PiernaD (int M, int R, int T){
 
     MusloD.write(90+M);
     RodillaD.write(90+R);
-    TobilloD.write(90-T+10);
+    TobilloD.write(90-T+0);
 
 }
 void PiernaDRead (int PrevioD[3]){
     PrevioD[0] = MusloD.read()-90; // porque esta cambiado el signo
     PrevioD[1] = RodillaD.read()-90;
-    PrevioD[2] = 90 - TobilloD.read()+10;
+    PrevioD[2] = 90 - TobilloD.read();
 }
 
 void Torso (int C, int BD, int BI){
-  Cadera.write(70-C);
+  Cadera.write(90-C-10);
   BrazoD.write(90-BD);
   BrazoI.write(90+BI);
 }
 
 void TorsoRead (int PrevioT[3]){
-    PrevioT[0] = 90 - Cadera.read(); // porque esta cambiado el signo
+    PrevioT[0] = 90 - Cadera.read()-10 ; // porque esta cambiado el signo
     PrevioT[1] = 90 - BrazoD.read();
     PrevioT[2] = BrazoI.read()-90;
 }
