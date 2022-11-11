@@ -10,8 +10,8 @@ float angulos[3];
 float Angulos[3]={30*M_PI/180, 20*M_PI/180, -10*M_PI/180};
 float Ri[4][4];
 float R03[4][4]={{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0},{0, 0, 0, 1}};
-const int deltat = 30; //ms
-const int delaytime = 1000; //ms
+const int deltat = 20; //ms
+const int delaytime = 0; //ms
 const int maxus = 2400; //us
 const int minus = 400; //us
 
@@ -53,48 +53,60 @@ void setup() {
 //  BrazoI.write(90);
 //  BrazoD.write(90);
   Cabeza.write(90);
+  MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); // 10 
+  delay (3000);
 }
 
 void loop(){
   //https://www.youtube.com/watch?v=G8Veye-N0A4 
 //MegaSweep(Md, Rd, Td, Mi, Ri, Ti, Kd, Bd, Bi, Kb, Time); 
   MegaSweep(00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 10*deltat); // 10 
-  delay (3000);
-  MegaSweep(00, 00, 5, 00, 00, 5, 00, 00, 00, 00, 10*deltat); // 20 
+  delay (delaytime);
+  MegaSweep(00, 00, 5, 00, 00, 5, 5, 00, 00, 00, 10*deltat); // 20 
   delay (delaytime);// ok
-  MegaSweep(00, 00, 8, 00, 00, 8, 00, 00, 00, 00, 10*deltat); // 30 
+  MegaSweep(00, 00, 8, 00, 00, 8, 10, 00, 00, 00, 10*deltat); // 30 
   //delay (1000);
   delay (delaytime);
-  MegaSweep(00, 00, 8, 25, 10, 15, 00, 00, 00, 00, 10*deltat); // 40 
+  MegaSweep(00, 00, 8, 25, 10, 15, 15, 00, 00, 00, 10*deltat); // 40 
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-10, 00, 10, 40, 60, 10, 00, 00, 00, 00, 10*deltat); // 50 
+  MegaSweep(-10, 00, 10, 40, 60, 10, 30, 00, 00, 00, 10*deltat); // 50 
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-15, 00, 15, 35, 30, 05, 00, 00, 00, 00, 10*deltat); // 60
+  MegaSweep(-15, 00, 15, 35, 30, 05, 20, 00, 00, 00, 10*deltat); // 60
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-20, 00, 15, 30, 00, 00, 00, 00, 00, 00, 10*deltat); // 70
+  MegaSweep(-20, 00, 15, 30, 00, 00, 15, 00, 00, 00, 10*deltat); // 70
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-20, 00, -10, 25, 0, -20, -00, 00, 00, 00, 10*deltat); // 80
+  MegaSweep(-20, 00, -10, 25, 0, -20, 10, 00, 00, 00, 10*deltat); // 80
   delay (delaytime);
-  MegaSweep(-15, 25, -20, 15, 00, -15, 00, 00, 00, 00, 10*deltat); // 90
+  MegaSweep(-15, 25, -20, 15, 00, -15, -10, 00, 00, 00, 10*deltat); // 90
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-5, 60, -40, -5, 00, -5, 00, 00, 00, 00, 10*deltat); //  100
-  //delay (1000);
-  delay (delaytime);
-  MegaSweep(30, 70, -15, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  110
-  delay (delaytime);
-  MegaSweep(35, 35, 00, -10, 00, -10, 00, 00, 00, 00, 10*deltat); //  120
-  delay (delaytime);
-  MegaSweep(30, 00, 00, -20, 00, -10, 00, 00, 00, 00, 10*deltat); //  130
-  delay (delaytime);
-  MegaSweep(25, 00, -20, -25, 20, -10, 00, 00, 00, 00, 10*deltat); //  140
-  delay (delaytime);
-  MegaSweep(-5, 00, -5, -5, 60, -40, 00, 00, 00, 00, 10*deltat); //  150 == 100 -> ciclo!
-  delay (delaytime);
+  while (1){
+    MegaSweep(-5, 60, -40, -5, 00, -5, -20, 00, 00, 00, 10*deltat); //  100
+    delay (delaytime);
+    MegaSweep(30, 70, -15, 00, 00, 00, -30, 00, 00, 00, 10*deltat); //  110
+    delay (delaytime);
+    MegaSweep(35, 35, 00, -10, 00, -10, -20, 00, 00, 00, 10*deltat); //  120
+    delay (delaytime);
+    MegaSweep(30, 00, 00, -20, 00, -10, -10, 00, 00, 00, 10*deltat); //  130
+    delay (delaytime);
+    MegaSweep(25, 00, -20, -25, 20, -10, 00, 00, 00, 00, 10*deltat); //  140
+    delay (delaytime);
+    MegaSweep(-5, 00, -5, -5, 60, -40, 20, 00, 00, 00, 10*deltat); //  150 == 100 -> ciclo!
+    delay (delaytime); // paso 1
+    MegaSweep(00, 00, 00, 30, 70, -15, 30, 00, 00, 00, 10*deltat); //  110
+    delay (delaytime);
+    MegaSweep(-10, 00, -10, 35, 35, 00, 20, 00, 00, 00, 10*deltat); //  120
+    delay (delaytime);
+    MegaSweep(-20, 00, -10, 30, 00, 00, 10, 00, 00, 00, 10*deltat); //  130
+    delay (delaytime);
+    MegaSweep(-25, 20, -10, 25, 00, -20, 00, 00, 00, 00, 10*deltat); //  140
+    delay (delaytime); // paso 2
+  }
+  
   
   delay (3000);
   
