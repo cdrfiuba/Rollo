@@ -82,17 +82,18 @@ void loop(){
   MegaSweep(-15, 25, -20, 15, 00, -15, 00, 00, 00, 00, 10*deltat); // 90
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-5, 60, 40, -5, 00, -5, 00, 00, 00, 00, 10*deltat); //  100
+  MegaSweep(-5, 60, -40, -5, 00, -5, 00, 00, 00, 00, 10*deltat); //  100
   //delay (1000);
   delay (delaytime);
-  MegaSweep(-12, 00, 25, 35, 20, -20, 00, 00, 00, 00, 10*deltat); //  110
-  //delay (1000);
+  MegaSweep(30, 70, -15, 00, 00, 00, 00, 00, 00, 00, 10*deltat); //  110
   delay (delaytime);
-  MegaSweep(-24, 00, 12, 25, 10, -30, 00, 00, 00, 00, 10*deltat); //  120
-  //delay (1000);
+  MegaSweep(35, 35, 00, -10, 00, -10, 00, 00, 00, 00, 10*deltat); //  120
   delay (delaytime);
-  MegaSweep(-18, 00, 15, 18, 15, -30, 00, 00, 00, 00, 10*deltat); //  12
-  //delay (1000);
+  MegaSweep(30, 00, 00, -20, 00, -10, 00, 00, 00, 00, 10*deltat); //  130
+  delay (delaytime);
+  MegaSweep(25, 00, -20, -25, 20, -10, 00, 00, 00, 00, 10*deltat); //  140
+  delay (delaytime);
+  MegaSweep(-5, 00, -5, -5, 60, -40, 00, 00, 00, 00, 10*deltat); //  150 == 100 -> ciclo!
   delay (delaytime);
   
   delay (3000);
